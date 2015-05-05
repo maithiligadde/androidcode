@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+
+        <!-- Header aligned to top -->
+
+        <!--<RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/purple"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="EasyLearn"
+                android:textColor="#000"
+                android:textSize="20sp" />
+        </RelativeLayout> -->
+
+        <!-- Footer aligned to bottom
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/purple"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Fixed Footer"
+                android:textColor="#000"
+                android:textSize="20sp" />
+        </RelativeLayout>-->
+
+        <!-- Content below header and above footer -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+
+            android:layout_height="200sp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/lay">
+
+
+
+                <ImageView
+                    android:layout_width="25sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/imageViewf"
+                    android:layout_toRightOf="@+id/imageButton"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/spain"/>
+                <EditText
+                    android:layout_width="250sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/editText"
+                    android:layout_toRightOf="@+id/imageButton"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@null"
+                    android:hint="Spanish"
+                    />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_actiontranslate"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_action"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <View
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_below="@+id/lay"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200sp"
+            android:layout_below="@+id/line"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:id="@+id/lay1">
+
+
+                <ImageView
+                    android:layout_width="25sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/imageViewf1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/unitedstatesofamerica"/>
+                <EditText
+                    android:layout_width="250sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/editText1"
+                    android:layout_toRightOf="@+id/imageButton2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@null"
+                    android:hint="English"
+                    />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+                <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton3"
+                android:layout_above="@+id/editText1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_actiontranslate"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    </RelativeLayout>
+
