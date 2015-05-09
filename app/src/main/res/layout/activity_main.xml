@@ -7,55 +7,55 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
 
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:id="@+id/lay">
+            android:id="@+id/lay"
+            >
 
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="50dp"
                     android:id="@+id/imageViewf"
-                    android:layout_toRightOf="@+id/imageButton"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:paddingRight="5dp"
                     android:src="@drawable/spain"/>
                 <EditText
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:id="@+id/editText"
-                    android:layout_toRightOf="@+id/imageButton"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:background="@null"
                     android:hint="Spanish"
                     />
-
+</LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageButton
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton"
+                    android:id="@+id/SpanishtoEngTranslation"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_actiontranslate"/>
+                    android:src="@drawable/ic_action_shuffle"/>
 
-                <ImageButton
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton1"
+                    android:id="@+id/SpanishPronunciation"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_action"/>
+                    android:src="@drawable/ic_action_volume_on"/>
             </LinearLayout>
 
 
@@ -67,7 +67,7 @@
             android:layout_below="@+id/lay"
             android:background="@android:color/darker_gray"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/line"
             android:orientation="horizontal"
@@ -99,23 +99,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-                <ImageButton
+        android:orientation="vertical"
+        android:gravity="center">
+                <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton3"
+                android:id="@+id/EngtoSpanishTranslate"
                 android:layout_above="@+id/editText1"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_actiontranslate"/>
+                android:src="@drawable/ic_action_shuffle"/>
 
-            <ImageButton
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton2"
+                android:id="@+id/Engpronunciation"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_action"/>
+                android:src="@drawable/ic_action_volume_on"/>
 
         </LinearLayout>
     </LinearLayout>
