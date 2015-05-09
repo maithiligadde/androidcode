@@ -40,13 +40,14 @@ import org.json.JSONObject;
 import android.view.KeyEvent;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.view.View.VISIBLE;
 
 public class MainActivity extends ActionBarActivity {
     MediaPlayer mp;
-    TextToSpeech tts;
+    TextToSpeech ttsEN,ttsES;
     final Context mContext = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,127 +57,31 @@ public class MainActivity extends ActionBarActivity {
         ViewGroup.LayoutParams layoutParams=(ViewGroup.LayoutParams)imageView.getLayoutParams();
         layoutParams.width=500;
         imageView.setLayoutParams(layoutParams);*/
-        final LinearLayout l=(LinearLayout)findViewById(R.id.lay);
-        final LinearLayout l1=(LinearLayout)findViewById(R.id.lay1);
-        ImageButton b = (ImageButton) findViewById(R.id.imageButton);
-        ImageButton b1 = (ImageButton) findViewById(R.id.imageButton3);
-        ImageButton b2 = (ImageButton) findViewById(R.id.imageButton2);
-        final EditText t=(EditText)findViewById(R.id.editText);
-        final EditText t1=(EditText)findViewById(R.id.editText1);
-        b.setOnClickListener(new View.OnClickListener() {
+        final LinearLayout l = (LinearLayout) findViewById(R.id.lay);
+        final LinearLayout l1 = (LinearLayout) findViewById(R.id.lay1);
+        ImageView TranslatetoEnglish = (ImageView) findViewById(R.id.SpanishtoEngTranslation);
+        ImageView TranslatetoSpanish = (ImageView) findViewById(R.id.EngtoSpanishTranslate);
+        ImageView English = (ImageView) findViewById(R.id.Engpronunciation);
+        ImageView Spanish=(ImageView)findViewById(R.id.SpanishPronunciation);
+        final EditText t = (EditText) findViewById(R.id.editText);
+        final EditText t1 = (EditText) findViewById(R.id.editText1);
+        TranslatetoEnglish.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-        RequestQueue queue = VolleyApplication.getInstance().getRequestQueue();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "https://gateway.watsonplatform.net/machine-translation-beta/api/v1/smt/0",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        l1.setVisibility(VISIBLE);
-                        InputMethodManager imm = (InputMethodManager)getSystemService(
-                                Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
-                        t1.setText(response);
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                })
-        {
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                String auth = "Basic "
-                        + Base64.encodeToString(("d6928dc0-e36a-4020-934f-d279ef1b8d2e:eCUGxugYxNJ0").getBytes(),
-                        Base64.NO_WRAP);
-                headers.put("Authorization", auth);
-                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("sid", "mt-eses-enus");
-                params.put("rt", "text");
-                params.put("txt", t.getText().toString());
-                return params;
-            }
-        };
-
-        queue.add(stringRequest);
-    }
-});
-    b1.setOnClickListener(new View.OnClickListener() {
-
-        @Override
-        public void onClick(View arg0) {
-
-            RequestQueue queue1 = VolleyApplication.getInstance().getRequestQueue();
-            StringRequest stringRequest1 = new StringRequest(Request.Method.POST,
-                    "https://gateway.watsonplatform.net/machine-translation-beta/api/v1/smt/0",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            t.setText(response);
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    }) {
-
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> headers = new HashMap<String, String>();
-                    String auth = "Basic "
-                            + Base64.encodeToString(("d6928dc0-e36a-4020-934f-d279ef1b8d2e:eCUGxugYxNJ0").getBytes(),
-                            Base64.NO_WRAP);
-                    headers.put("Authorization", auth);
-                    headers.put("Content-Type", "application/x-www-form-urlencoded");
-                    return headers;
-                }
-
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("sid", "mt-enus-eses");
-                    params.put("rt", "text");
-                    params.put("txt", t1.getText().toString());
-                    return params;
-                }
-            };
-
-            queue1.add(stringRequest1);
-
-        }
-    });
-        b2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                RequestQueue queue2 = VolleyApplication.getInstance().getRequestQueue();
-                StringRequest stringRequest2 = new StringRequest(Request.Method.POST,
-                        "https://stream.watsonplatform.net/text-to-speech-beta/api",
+                RequestQueue queue = VolleyApplication.getInstance().getRequestQueue();
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        "https://gateway.watsonplatform.net/machine-translation-beta/api/v1/smt/0",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                String text=t1.getText().toString();
-                                tts.speak(text, TextToSpeech.QUEUE_ADD, null);
-                                //mp = MediaPlayer.create(mContext, Uri.parse(response));
-                                //mp.start();
+                                l1.setVisibility(VISIBLE);
+                                InputMethodManager imm = (InputMethodManager) getSystemService(
+                                        Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
+                                t1.setText(response);
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -184,34 +89,108 @@ public class MainActivity extends ActionBarActivity {
                             public void onErrorResponse(VolleyError error) {
 
                             }
-                        })
-                {
+                        }) {
 
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> headers = new HashMap<String, String>();
                         String auth = "Basic "
-                                + Base64.encodeToString(("7c9064a1-7f1a-447d-ba0a-acfffea96bb4:yYk1qSMm3w1q").getBytes(),
+                                + Base64.encodeToString(("d6928dc0-e36a-4020-934f-d279ef1b8d2e:eCUGxugYxNJ0").getBytes(),
                                 Base64.NO_WRAP);
                         headers.put("Authorization", auth);
                         headers.put("Content-Type", "application/x-www-form-urlencoded");
                         return headers;
                     }
 
-                   /* @Override
+                    @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
+                        params.put("sid", "mt-eses-enus");
+                        params.put("rt", "text");
+                        params.put("txt", t.getText().toString());
+                        return params;
+                    }
+                };
+
+                queue.add(stringRequest);
+            }
+        });
+        TranslatetoSpanish.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                RequestQueue queue1 = VolleyApplication.getInstance().getRequestQueue();
+                StringRequest stringRequest1 = new StringRequest(Request.Method.POST,
+                        "https://gateway.watsonplatform.net/machine-translation-beta/api/v1/smt/0",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                t.setText(response);
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }) {
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        String auth = "Basic "
+                                + Base64.encodeToString(("d6928dc0-e36a-4020-934f-d279ef1b8d2e:eCUGxugYxNJ0").getBytes(),
+                                Base64.NO_WRAP);
+                        headers.put("Authorization", auth);
+                        headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("sid", "mt-enus-eses");
+                        params.put("rt", "text");
                         params.put("txt", t1.getText().toString());
                         return params;
-                    }*/
+                    }
+                };
 
+                queue1.add(stringRequest1);
 
-                   };
-
-
-               queue2.add(stringRequest2);
             }
-        });}
+        });
+        ttsEN = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                ttsEN.setLanguage(Locale.ENGLISH);
+            }
+        });
+
+        ttsES = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                ttsES.setLanguage(Locale.ENGLISH);
+            }
+        });
+
+        English.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ttsEN.speak(t1.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+        Spanish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ttsES.speak(t.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
