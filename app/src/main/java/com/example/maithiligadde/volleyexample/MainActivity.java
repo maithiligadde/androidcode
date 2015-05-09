@@ -134,7 +134,9 @@ public class MainActivity extends ActionBarActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
+                                InputMethodManager imm = (InputMethodManager) getSystemService(
+                                        Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(spanishword.getWindowToken(), 0);
                                 spanishword.setText(response);
 
                             }
