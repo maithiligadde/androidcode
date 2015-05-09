@@ -30,7 +30,7 @@
                 <EditText
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:id="@+id/editText"
+                    android:id="@+id/spanishword"
                     android:background="@null"
                     android:hint="Spanish"
                     />
@@ -45,16 +45,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/SpanishtoEngTranslation"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentEnd="true"
+
                     android:src="@drawable/ic_action_shuffle"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/SpanishPronunciation"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentEnd="true"
+
                     android:src="@drawable/ic_action_volume_on"/>
             </LinearLayout>
 
@@ -80,18 +78,13 @@
                     android:layout_width="25dp"
                     android:layout_height="50dp"
                     android:id="@+id/imageViewf1"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentEnd="true"
+
                     android:paddingRight="5dp"
                     android:src="@drawable/unitedstatesofamerica"/>
                 <EditText
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:id="@+id/editText1"
-                    android:layout_toRightOf="@+id/imageButton2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:id="@+id/Englishword"
                     android:background="@null"
                     android:hint="English"
                     />
@@ -105,17 +98,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/EngtoSpanishTranslate"
-                android:layout_above="@+id/editText1"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+
                 android:src="@drawable/ic_action_shuffle"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Engpronunciation"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+
                 android:src="@drawable/ic_action_volume_on"/>
 
         </LinearLayout>
