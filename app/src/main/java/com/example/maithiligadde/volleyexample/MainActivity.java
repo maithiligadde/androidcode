@@ -35,6 +35,7 @@ import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.maithiligadde.volleyexample.R;
 import com.example.maithiligadde.volleyexample.VolleyApplication;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 import android.view.KeyEvent;
@@ -63,8 +64,15 @@ public class MainActivity extends ActionBarActivity {
         ImageView TranslatetoSpanish = (ImageView) findViewById(R.id.EngtoSpanishTranslate);
         ImageView English = (ImageView) findViewById(R.id.Engpronunciation);
         ImageView Spanish=(ImageView)findViewById(R.id.SpanishPronunciation);
-        final EditText t = (EditText) findViewById(R.id.editText);
-        final EditText t1 = (EditText) findViewById(R.id.editText1);
+        final EditText spanishword = (EditText) findViewById(R.id.spanishword);
+        final EditText englishword = (EditText) findViewById(R.id.Englishword);
+        Bundle pushBundle=getIntent().getExtras();
+        if(pushBundle!=null && pushBundle.get("com.parse.Data")!=null ){
+
+            Gson gson=new Gson();
+            Map<String,String> map= gson.fromJson((String) pushBundle.get("com.parse.Data"),Map.class);
+            spanishword.setText(map.get("Word"));
+        }
         TranslatetoEnglish.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,8 +87,8 @@ public class MainActivity extends ActionBarActivity {
                                 l1.setVisibility(VISIBLE);
                                 InputMethodManager imm = (InputMethodManager) getSystemService(
                                         Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
-                                t1.setText(response);
+                                imm.hideSoftInputFromWindow(spanishword.getWindowToken(), 0);
+                                englishword.setText(response);
 
                             }
                         },
@@ -107,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
                         Map<String, String> params = new HashMap<>();
                         params.put("sid", "mt-eses-enus");
                         params.put("rt", "text");
-                        params.put("txt", t.getText().toString());
+                        params.put("txt", spanishword.getText().toString());
                         return params;
                     }
                 };
@@ -127,7 +135,7 @@ public class MainActivity extends ActionBarActivity {
                             @Override
                             public void onResponse(String response) {
 
-                                t.setText(response);
+                                spanishword.setText(response);
 
                             }
                         },
@@ -154,7 +162,7 @@ public class MainActivity extends ActionBarActivity {
                         Map<String, String> params = new HashMap<>();
                         params.put("sid", "mt-enus-eses");
                         params.put("rt", "text");
-                        params.put("txt", t1.getText().toString());
+                        params.put("txt", englishword.getText().toString());
                         return params;
                     }
                 };
@@ -180,14 +188,14 @@ public class MainActivity extends ActionBarActivity {
         English.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ttsEN.speak(t1.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                ttsEN.speak(englishword.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
         Spanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ttsES.speak(t.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                ttsES.speak(spanishword.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }
