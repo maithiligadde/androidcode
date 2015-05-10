@@ -31,14 +31,23 @@ import java.util.Map;
 import static android.view.View.VISIBLE;
 
 public class MainActivity extends ActionBarActivity {
+    private static final int SETTINGS_REQUEST =1 ;
     MediaPlayer mp;
     TextToSpeech ttsEN,ttsES;
     final Context mContext = this;
+    private String tgtLanguage="enus";
+    private String srcLanguage="eses";
+    HashMap<String,String> codeToLanguage;
+    EditText srcWord;
+    EditText tgtWord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        codeToLanguage=new HashMap<>();
+        codeToLanguage.put("eses","Spanish");
+        codeToLanguage.put("enus","English");
+        codeToLanguage.put("frfr","French");
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
@@ -48,19 +57,21 @@ public class MainActivity extends ActionBarActivity {
         ImageView TranslatetoSpanish = (ImageView) findViewById(R.id.EngtoSpanishTranslate);
         ImageView English = (ImageView) findViewById(R.id.Engpronunciation);
         ImageView Spanish=(ImageView)findViewById(R.id.SpanishPronunciation);
-        final EditText spanishword = (EditText) findViewById(R.id.spanishword);
-        final EditText englishword = (EditText) findViewById(R.id.Englishword);
+        srcWord = (EditText) findViewById(R.id.spanishword);
+        tgtWord = (EditText) findViewById(R.id.Englishword);
+        srcWord.setHint(codeToLanguage.get(srcLanguage));
+        tgtWord.setHint(codeToLanguage.get(tgtLanguage));
         Bundle pushBundle=getIntent().getExtras();
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
-                englishword.setText(intent.getStringExtra(intent.EXTRA_TEXT)); // Handle text being sent
+                tgtWord.setText(intent.getStringExtra(intent.EXTRA_TEXT)); // Handle text being sent
             }
         }
         if(pushBundle!=null && pushBundle.get("com.parse.Data")!=null ){
 
             Gson gson=new Gson();
             Map<String,String> map= gson.fromJson((String) pushBundle.get("com.parse.Data"),Map.class);
-            spanishword.setText(map.get("Word"));
+            srcWord.setText(map.get("Word"));
         }
         TranslatetoEnglish.setOnClickListener(new View.OnClickListener() {
 
@@ -76,8 +87,8 @@ public class MainActivity extends ActionBarActivity {
                                 l1.setVisibility(VISIBLE);
                                 InputMethodManager imm = (InputMethodManager) getSystemService(
                                         Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(spanishword.getWindowToken(), 0);
-                                englishword.setText(response);
+                                imm.hideSoftInputFromWindow(srcWord.getWindowToken(), 0);
+                                tgtWord.setText(response);
 
                             }
                         },
@@ -102,9 +113,9 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        params.put("sid", "mt-eses-enus");
+                        params.put("sid", "mt-"+srcLanguage+"-"+tgtLanguage);
                         params.put("rt", "text");
-                        params.put("txt", spanishword.getText().toString());
+                        params.put("txt", srcWord.getText().toString());
                         return params;
                     }
                 };
@@ -125,8 +136,8 @@ public class MainActivity extends ActionBarActivity {
                             public void onResponse(String response) {
                                 InputMethodManager imm = (InputMethodManager) getSystemService(
                                         Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(spanishword.getWindowToken(), 0);
-                                spanishword.setText(response);
+                                imm.hideSoftInputFromWindow(srcWord.getWindowToken(), 0);
+                                srcWord.setText(response);
 
                             }
                         },
@@ -151,9 +162,9 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        params.put("sid", "mt-enus-eses");
+                        params.put("sid", "mt-"+tgtLanguage+"-"+srcLanguage);
                         params.put("rt", "text");
-                        params.put("txt", englishword.getText().toString());
+                        params.put("txt", tgtWord.getText().toString());
                         return params;
                     }
                 };
@@ -179,14 +190,14 @@ public class MainActivity extends ActionBarActivity {
         English.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ttsEN.speak(englishword.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                ttsEN.speak(tgtWord.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
         Spanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ttsES.speak(spanishword.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                ttsES.speak(srcWord.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }
@@ -206,13 +217,40 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showSettings();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+public void showSettings(){
+    Intent intent=new Intent(this,SettingsActivity.class);
+    startActivityForResult(intent, SETTINGS_REQUEST);
+}
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == SETTINGS_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
 
+                System.out.println("received data "+data);
+                srcLanguage=data.getStringExtra("src");
+                tgtLanguage=data.getStringExtra("tgt");
+                resetEditTexts();
+
+            }
+        }
+    }
+
+    private void resetEditTexts() {
+        srcWord.setText(null);
+        tgtWord.setText(null);
+        srcWord.setHint(codeToLanguage.get(srcLanguage));
+        tgtWord.setHint(codeToLanguage.get(tgtLanguage));
+
+    }
 }
 
 
