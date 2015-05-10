@@ -3,6 +3,7 @@ package com.example.maithiligadde.volleyexample;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -54,10 +55,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*ImageView imageView = (ImageView)findViewById(R.id.imageViewf);
-        ViewGroup.LayoutParams layoutParams=(ViewGroup.LayoutParams)imageView.getLayoutParams();
-        layoutParams.width=500;
-        imageView.setLayoutParams(layoutParams);*/
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
         final LinearLayout l = (LinearLayout) findViewById(R.id.lay);
         final LinearLayout l1 = (LinearLayout) findViewById(R.id.lay1);
         ImageView TranslatetoEnglish = (ImageView) findViewById(R.id.SpanishtoEngTranslation);
@@ -67,6 +68,11 @@ public class MainActivity extends ActionBarActivity {
         final EditText spanishword = (EditText) findViewById(R.id.spanishword);
         final EditText englishword = (EditText) findViewById(R.id.Englishword);
         Bundle pushBundle=getIntent().getExtras();
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                englishword.setText(intent.getStringExtra(intent.EXTRA_TEXT)); // Handle text being sent
+            }
+        }
         if(pushBundle!=null && pushBundle.get("com.parse.Data")!=null ){
 
             Gson gson=new Gson();
