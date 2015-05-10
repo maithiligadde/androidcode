@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 public class SettingsActivity extends ActionBarActivity {
 
-    String[] defaultLanguagePairs = {"English - Espanol", "English - French" };
+    String[] defaultLanguagePairs = {"English - Espanol", "English - French" ,"English - Portuguese" };
     HashMap<String,String> srcLanguageMap;
     HashMap<String,String> tgtLanguageMap;
 
@@ -34,8 +34,11 @@ public class SettingsActivity extends ActionBarActivity {
         tgtLanguageMap=new HashMap<>();
         srcLanguageMap.put("English - Espanol","eses");
         srcLanguageMap.put("English - French","frfr");
+        srcLanguageMap.put("English - Portuguese","ptbr");
         tgtLanguageMap.put("English - Espanol","enus");
         tgtLanguageMap.put("English - French","enus");
+        tgtLanguageMap.put("English - Portuguese","enus");
+
         ListView listView = (ListView) findViewById(R.id.settingList);
         listView.setAdapter(new SettingAdapter(this, defaultLanguagePairs));
 

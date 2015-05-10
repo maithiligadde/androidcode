@@ -48,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
         codeToLanguage.put("eses","Spanish");
         codeToLanguage.put("enus","English");
         codeToLanguage.put("frfr","French");
+        codeToLanguage.put("ptbr","Portugese");
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
@@ -64,7 +65,56 @@ public class MainActivity extends ActionBarActivity {
         Bundle pushBundle=getIntent().getExtras();
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
-                tgtWord.setText(intent.getStringExtra(intent.EXTRA_TEXT)); // Handle text being sent
+                //tgtWord.setText(intent.getStringExtra(intent.EXTRA_TEXT));
+                final String queryString=intent.getStringExtra(intent.EXTRA_TEXT);
+                RequestQueue queue = VolleyApplication.getInstance().getRequestQueue();
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        "https://gateway.watsonplatform.net/language-identification-beta/api/v1/txtlid/0",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                response=response.replaceAll("-","").toLowerCase();
+                                if(response.equals(srcLanguage)){
+                                    srcWord.setText(queryString);
+
+                                }
+                                else {
+                                    tgtWord.setText(queryString);
+                                }
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }) {
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        String auth = "Basic "
+                                + Base64.encodeToString(("35b7c16c-36e8-4ceb-8f1a-fe24a951e3c6:U3mxk1FlAWqL").getBytes(),
+                                Base64.NO_WRAP);
+                        headers.put("Authorization", auth);
+                        headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("sid", "lid-generic");
+                        params.put("rt", "text");
+                        params.put("txt", queryString);
+                        return params;
+                    }
+                };
+
+                queue.add(stringRequest);
+
             }
         }
         if(pushBundle!=null && pushBundle.get("com.parse.Data")!=null ){
