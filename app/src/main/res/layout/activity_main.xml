@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/SpanishtoEngTranslation"
 
-                    android:src="@drawable/ic_action_shuffle"/>
+                    android:src="@drawable/ic_action_refresh"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/EngtoSpanishTranslate"
 
-                android:src="@drawable/ic_action_shuffle"/>
+                android:src="@drawable/ic_action_refresh"/>
 
             <ImageView
                 android:layout_width="wrap_content"
