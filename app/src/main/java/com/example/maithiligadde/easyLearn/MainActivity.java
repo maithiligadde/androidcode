@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
@@ -38,8 +37,14 @@ public class MainActivity extends ActionBarActivity {
     private String tgtLanguage="enus";
     private String srcLanguage="eses";
     HashMap<String,String> codeToLanguage;
+    HashMap<String,String> flagmap;
     EditText srcWord;
     EditText tgtWord;
+    ImageView srcflag;
+    ImageView tgtflag;
+    int srcimageid;
+    int tgtimageid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +61,14 @@ public class MainActivity extends ActionBarActivity {
         final LinearLayout l1 = (LinearLayout) findViewById(R.id.lay1);
         ImageView TranslatetoEnglish = (ImageView) findViewById(R.id.SpanishtoEngTranslation);
         ImageView TranslatetoSpanish = (ImageView) findViewById(R.id.EngtoSpanishTranslate);
-        ImageView English = (ImageView) findViewById(R.id.Engpronunciation);
-        ImageView Spanish=(ImageView)findViewById(R.id.SpanishPronunciation);
+        final ImageView English = (ImageView) findViewById(R.id.Engpronunciation);
+        srcflag = (ImageView) findViewById(R.id.imageViewf);
+        tgtflag = (ImageView) findViewById(R.id.imageViewf1);
+        final ImageView Spanish=(ImageView)findViewById(R.id.SpanishPronunciation);
         srcWord = (EditText) findViewById(R.id.spanishword);
         tgtWord = (EditText) findViewById(R.id.Englishword);
         srcWord.setHint(codeToLanguage.get(srcLanguage));
         tgtWord.setHint(codeToLanguage.get(tgtLanguage));
-        Bundle pushBundle=getIntent().getExtras();
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
                 //tgtWord.setText(intent.getStringExtra(intent.EXTRA_TEXT));
@@ -73,17 +79,21 @@ public class MainActivity extends ActionBarActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                response=response.replaceAll("-","").toLowerCase();
-                                if(response.equals(srcLanguage)){
+                                response = response.replaceAll("-", "").toLowerCase();
+                                if (response.equals(srcLanguage)) {
                                     srcWord.setText(queryString);
-
-                                }
-                                else {
+                                    srcflag.setVisibility(View.VISIBLE);
+                                    srcimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" +srcLanguage, null, null);
+                                    srcflag.setImageResource(srcimageid);
+                                } else {
                                     tgtWord.setText(queryString);
+                                    tgtflag.setVisibility(View.VISIBLE);
+                                    int tgtimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" +tgtLanguage, null, null);
+                                    tgtflag.setImageResource(tgtimageid);
                                 }
-
 
                             }
+
                         },
                         new Response.ErrorListener() {
                             @Override
@@ -117,10 +127,11 @@ public class MainActivity extends ActionBarActivity {
 
             }
         }
-        if(pushBundle!=null && pushBundle.get("com.parse.Data")!=null ){
+
+        if(intent.getStringExtra("com.parse.Data")!=null ){
 
             Gson gson=new Gson();
-            Map<String,String> map= gson.fromJson((String) pushBundle.get("com.parse.Data"),Map.class);
+            Map<String,String> map= gson.fromJson(intent.getStringExtra("com.parse.Data"),Map.class);
             srcWord.setText(map.get("Word"));
         }
         TranslatetoEnglish.setOnClickListener(new View.OnClickListener() {
@@ -274,10 +285,10 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-public void showSettings(){
-    Intent intent=new Intent(this,SettingsActivity.class);
-    startActivityForResult(intent, SETTINGS_REQUEST);
-}
+    public void showSettings(){
+        Intent intent=new Intent(this,SettingsActivity.class);
+        startActivityForResult(intent, SETTINGS_REQUEST);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -299,7 +310,10 @@ public void showSettings(){
         tgtWord.setText(null);
         srcWord.setHint(codeToLanguage.get(srcLanguage));
         tgtWord.setHint(codeToLanguage.get(tgtLanguage));
-
+        srcimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" + srcLanguage, null, null);
+        srcflag.setImageResource(srcimageid);
+        tgtimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" + tgtLanguage, null, null);
+        tgtflag.setImageResource(tgtimageid);
     }
 }
 

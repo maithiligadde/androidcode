@@ -5,6 +5,7 @@ import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
+import com.parse.PushService;
 
 public class VolleyApplication extends Application {
     private static VolleyApplication sInstance;
@@ -15,6 +16,7 @@ public class VolleyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, "iivVAWy5b6TbI3KLczeOiV54f79Ij4whAyI704d2", "isECpylgKDEeQr7lj8CkyzKrmXS2d5HDHkgyBSxU");
+        PushService.setDefaultPushCallback(this, MainActivity.class);
         mRequestQueue = Volley.newRequestQueue(this);
         sInstance = this;
     }
