@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "EasyLearn": {
+      "applicationId": "iivVAWy5b6TbI3KLczeOiV54f79Ij4whAyI704d2",
+      "masterKey": "xhqMu10Yx1CmsqRVHFY7f1djpduNTyaFODbyK7LC"
+    },
+    "_default": {
+      "link": "EasyLearn"
+    }
+  }
+}
