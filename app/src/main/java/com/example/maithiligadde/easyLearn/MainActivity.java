@@ -132,7 +132,7 @@ public class MainActivity extends ActionBarActivity {
 
             Gson gson=new Gson();
             Map<String,String> map= gson.fromJson(intent.getStringExtra("com.parse.Data"),Map.class);
-            srcWord.setText(map.get("Word"));
+            tgtWord.setText(map.get("Word"));
         }
         TranslatetoEnglish.setOnClickListener(new View.OnClickListener() {
 
