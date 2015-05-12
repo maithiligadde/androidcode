@@ -84,12 +84,12 @@ public class MainActivity extends ActionBarActivity {
                                 if (response.equals(srcLanguage)) {
                                     srcWord.setText(queryString);
                                     srcflag.setVisibility(View.VISIBLE);
-                                    srcimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" +srcLanguage, null, null);
+                                    srcimageid = getResources().getIdentifier("com.maithiligadde.easyLearn:drawable/" +srcLanguage, null, null);
                                     srcflag.setImageResource(srcimageid);
                                 } else {
                                     tgtWord.setText(queryString);
                                     tgtflag.setVisibility(View.VISIBLE);
-                                    int tgtimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" +tgtLanguage, null, null);
+                                    int tgtimageid = getResources().getIdentifier("com.maithiligadde.easyLearn:drawable/" +tgtLanguage, null, null);
                                     tgtflag.setImageResource(tgtimageid);
                                 }
 
@@ -311,9 +311,9 @@ public class MainActivity extends ActionBarActivity {
         tgtWord.setText(null);
         srcWord.setHint(codeToLanguage.get(srcLanguage));
         tgtWord.setHint(codeToLanguage.get(tgtLanguage));
-        srcimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" + srcLanguage, null, null);
+        srcimageid = getResources().getIdentifier("com.maithiligadde.easyLearn:drawable/" + srcLanguage, null, null);
         srcflag.setImageResource(srcimageid);
-        tgtimageid = getResources().getIdentifier("com.example.maithiligadde.easyLearn:drawable/" + tgtLanguage, null, null);
+        tgtimageid = getResources().getIdentifier("com.maithiligadde.easyLearn:drawable/" + tgtLanguage, null, null);
         tgtflag.setImageResource(tgtimageid);
     }
 }
