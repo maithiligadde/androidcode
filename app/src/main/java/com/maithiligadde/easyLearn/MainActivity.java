@@ -1,4 +1,4 @@
-package com.example.maithiligadde.easyLearn;
+package com.maithiligadde.easyLearn;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
+import com.maithiligadde.easyLearn.R;
 import com.google.gson.Gson;
 
 import java.util.HashMap;

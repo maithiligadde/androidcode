@@ -1,4 +1,4 @@
-package com.example.maithiligadde.easyLearn;
+package com.maithiligadde.easyLearn;
 
 
 
@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.maithiligadde.easyLearn.R;
 
 import java.util.HashMap;
 

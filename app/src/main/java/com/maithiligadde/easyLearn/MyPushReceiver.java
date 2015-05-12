@@ -1,4 +1,4 @@
-package com.example.maithiligadde.easyLearn;
+package com.maithiligadde.easyLearn;
 
 import android.content.Context;
 import android.content.Intent;

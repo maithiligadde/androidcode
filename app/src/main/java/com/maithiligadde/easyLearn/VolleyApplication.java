@@ -1,4 +1,4 @@
-package com.example.maithiligadde.easyLearn;
+package com.maithiligadde.easyLearn;
 
 import android.app.Application;
 

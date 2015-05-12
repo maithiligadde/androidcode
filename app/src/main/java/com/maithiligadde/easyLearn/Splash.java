@@ -1,9 +1,11 @@
-package com.example.maithiligadde.easyLearn;
+package com.maithiligadde.easyLearn;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.maithiligadde.easyLearn.R;
 
 /**
  * Created by Maithiligadde on 5/9/15.
