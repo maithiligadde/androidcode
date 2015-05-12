@@ -4,6 +4,6 @@
     android:layout_height="match_parent">
     <ImageView android:id="@+id/splashscreen" android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:src="@drawable/orangeglobe"
+        android:src="@drawable/neworangeglobe"
         android:layout_gravity="center"/>
 </LinearLayout>

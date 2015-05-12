@@ -20,7 +20,7 @@
     <application
         android:name="com.maithiligadde.easyLearn.VolleyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/orangeglobe"
+        android:icon="@drawable/neworangeglobe"
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
         <activity
